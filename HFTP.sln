@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HFTP", "HFTP\HFTP.csproj", "{4B0F6E58-A0CA-4DC8-A00E-BB13CBE152C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{38F6E3CD-E737-4BE5-9A89-7A412F7B0E9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionMMCenter", "OptionMMCenter\OptionMMCenter.csproj", "{0938EEB3-A181-47EE-A872-E058F262C7DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B0F6E58-A0CA-4DC8-A00E-BB13CBE152C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0F6E58-A0CA-4DC8-A00E-BB13CBE152C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0F6E58-A0CA-4DC8-A00E-BB13CBE152C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0F6E58-A0CA-4DC8-A00E-BB13CBE152C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F6E3CD-E737-4BE5-9A89-7A412F7B0E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F6E3CD-E737-4BE5-9A89-7A412F7B0E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F6E3CD-E737-4BE5-9A89-7A412F7B0E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F6E3CD-E737-4BE5-9A89-7A412F7B0E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0938EEB3-A181-47EE-A872-E058F262C7DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0938EEB3-A181-47EE-A872-E058F262C7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0938EEB3-A181-47EE-A872-E058F262C7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0938EEB3-A181-47EE-A872-E058F262C7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
