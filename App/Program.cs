@@ -237,15 +237,11 @@ namespace App
         }
         static void testMM2()
         {
-            List<ASecurity> underlyinglist = new List<ASecurity>();
-            underlyinglist.Add(new ETF("510050", Exchange.SHE));
-            underlyinglist.Add(new ETF("510180", Exchange.SHE));
-            underlyinglist.Add(new ETF("600104", Exchange.SHE));
-            underlyinglist.Add(new ETF("601318", Exchange.SHE));
+            AMarket mkt = AMarket.GetInstance(MarketVendor.Exchange);
+            ASecurity s = mkt.GetOption("90000229", new ETF("510050", Exchange.SHE));
 
             AOptionMakeMarket mm = new OptionMakeMarket1();
-            mm.AddOptions(underlyinglist);
-
+            mm.AddOptions(s);
             mm.Run();
         }
         #endregion

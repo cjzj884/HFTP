@@ -31,8 +31,6 @@ namespace HFTP.Strategy.MarketMaker
             try
             {
                 //连续竞价做市策略
-                //Debug.Print(string.Format("makemarket4trade:{0},{1}", o.code, o.name));
-
                 double askpx = 0, bidpx = 0;
                 if (checkmmstatus(o, 0.5, ref askpx, ref bidpx))
                 {

@@ -75,6 +75,20 @@ namespace HFTP.Market
         public Hashtable htUnderlyingSets = new Hashtable();
         public abstract List<Option> GetOptionSet(ASecurity underlying);
         public abstract List<Option> GetOptionSet(List<ASecurity> underlyings);
+        public Option GetOption(string code, ASecurity underlying)
+        {
+            Option o = null;
+            if (!htUnderlyingSets.Contains(underlying.code))
+                this.GetOptionSet(underlying);
+
+            if (htOptionSets.Contains(underlying.code))
+            {
+                List<Option> oplist = (List<Option>)htOptionSets[underlying.code];
+                o = oplist.Find(delegate(Option of) { return of.code == code; });
+            }
+
+            return o;
+        }
         #endregion
     }
 }

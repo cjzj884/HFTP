@@ -170,8 +170,13 @@ namespace HFTP.Strategy.MarketMaker
                             //忽略该合约
                             continue;
                         case TradingPhase.START:    //开市前
+                            this.makemarket4trade(o);
+                            MessageManager.GetInstance().Add(MessageType.Information, "开市前准备");
+                            Thread.Sleep(5000);
+                            break;
                         case TradingPhase.BREAK:    //午休
-                            //休息5秒
+                            //休息5秒                            
+                            MessageManager.GetInstance().Add(MessageType.Information, "午休");
                             Thread.Sleep(5000);
                             break;
                         default:
@@ -221,6 +226,10 @@ namespace HFTP.Strategy.MarketMaker
             //开盘价
             if (o.bidaskbook.open > 0)
                 return o.bidaskbook.open;
+
+            //昨日结算价
+            if (o.bidaskbook.presettle > 0)
+                return o.bidaskbook.presettle;
 
             //理论价
             return getBSvalue(o);
@@ -280,10 +289,13 @@ namespace HFTP.Strategy.MarketMaker
                 
                 //是否需要更改委托
                 if (o.makemarketstat.lastcenterprice != centerpx)
+                {
+                    o.makemarketstat.lastcenterprice = centerpx;
                     return true;
+                }
                 else
                 {
-                    if(centerpx == 0)
+                    if (centerpx == 0)
                         MessageManager.GetInstance().Add(MessageType.Error, string.Format("期权无中心价：{0},{1}", o.code, o.name));
 
                     return false;
@@ -337,10 +349,15 @@ namespace HFTP.Strategy.MarketMaker
             paraAsk.portfolio = param.portfolio;
             paraAsk.securitycode = param.securitycode;
             paraAsk.exchange = o.exchange;
-            paraAsk.volume = c_min_entrust_volume;
             paraAsk.price = askpx;                          //Ask
             paraAsk.entrustdirection = TradeDirection.SELL; //卖出
-            if (longposition > paraAsk.volume)              //开/平
+            paraAsk.volume = c_min_entrust_volume;
+            if (longposition >= c_min_entrust_volume * 2)    //开平
+            {
+                paraAsk.futuredirection = FutureDirection.COVER;
+                paraAsk.volume = c_min_entrust_volume * 2;
+            }
+            else if (longposition >= c_min_entrust_volume)
                 paraAsk.futuredirection = FutureDirection.COVER;
             else
                 paraAsk.futuredirection = FutureDirection.OPEN;
@@ -350,10 +367,15 @@ namespace HFTP.Strategy.MarketMaker
             paraBid.portfolio = param.portfolio;
             paraBid.securitycode = param.securitycode;
             paraBid.exchange = o.exchange;
-            paraBid.volume = c_min_entrust_volume;
             paraBid.price = bidpx;                          //Bid
             paraBid.entrustdirection = TradeDirection.BUY;  //买入
-            if (shortposition > paraBid.volume)             //开平
+            paraBid.volume = c_min_entrust_volume;
+            if (shortposition >= c_min_entrust_volume * 2)   //开平
+            {
+                paraBid.futuredirection = FutureDirection.COVER;
+                paraBid.volume = c_min_entrust_volume * 2;
+            }
+            else if (shortposition >= c_min_entrust_volume)
                 paraBid.futuredirection = FutureDirection.COVER;
             else
                 paraBid.futuredirection = FutureDirection.OPEN; 
